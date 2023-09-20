@@ -7,7 +7,7 @@ const { CAMERA_URL } = declareEnvs(['CAMERA_URL']);
 
 export const getCameraFeed = async () => {
   const request = await axios
-    .get(CAMERA_URL, { responseType: 'arraybuffer' })
+    .get(CAMERA_URL, { responseType: 'arraybuffer', timeout: 5000 })
     .catch(genericErrorHandler);
 
   return request.data;

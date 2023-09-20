@@ -29,7 +29,7 @@ import { ToastComponent } from 'src/app/shared/toast/toast.component';
   styleUrls: ['./camera.component.scss'],
 })
 export class CameraComponent {
-  private _requestWaitTime = 250;
+  private _requestWaitTime = 1000;
   public fps = 1000 / this._requestWaitTime;
   public cameraInfo$ = this._api.cameraInfo().pipe(
     catchError(async (err) => {

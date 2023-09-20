@@ -50,16 +50,30 @@ export class ConfigComponent {
 
   public configForm = new FormGroup({
     authKey: new FormControl(this._authService.authKey, [Validators.required]),
+    targetAddress: new FormControl(this._authService.targetAddress, [
+      Validators.required,
+    ]),
   });
 
   constructor(private _authService: AuthService, private _router: Router) {}
 
   public submitConfig(): void {
-    if (!this.configForm.value.authKey) {
+    const invalid = Object.values(this.configForm.value).some(
+      (value) => !value
+    );
+    if (invalid) {
       return;
     }
 
-    this._authService.setAuth(this.configForm.value.authKey);
+    const _obj = this.configForm.value as {
+      authKey: string;
+      targetAddress: string;
+    };
+
+    this._authService.setAuth(_obj.authKey);
+    this._authService.setTargetAddress(
+      this.configForm.value.targetAddress || ''
+    );
     location.reload();
   }
 }

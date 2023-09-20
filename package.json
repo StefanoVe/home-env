@@ -4,12 +4,23 @@
   "type": "module",
   "scripts": {
     "server": "bun run --watch server/src/index.ts",
-    "client": "cd client && ng serve"
+    "client": "cd client && bunx ng serve",
+    "build-server": "rm -rf dist && mkdir dist && bun run utils/server/bundler.ts && cp .env.prod.json dist/server && npx env-cmd node utils/server/deploy.js",
+    "prod": "node dist/server/index.js"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/node-ssh": "^7.0.1",
+    "@types/ssh2": "^1.11.13",
+    "@types/ssh2-streams": "^0.1.9",
+    "bun-types": "latest",
+    "env-cmd": "^10.1.0",
+    "ncc": "^0.3.6",
+    "node-ssh": "^13.1.0",
+    "ssh2": "^1.14.0",
+    "ssh2-streams": "^0.4.10"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "dependencies": {}
 }

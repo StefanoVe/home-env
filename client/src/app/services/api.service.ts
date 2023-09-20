@@ -38,7 +38,7 @@ export class ApiService {
 
   public ping() {
     return this.httpClient
-      .get<ServerStatus>('http://localhost:3000/api/ping', this._headers)
+      .get<ServerStatus>(this._url('ping'), this._headers)
       .pipe(
         catchError(async (err) => {
           this.serverStatus$.next(null);
@@ -52,14 +52,14 @@ export class ApiService {
 
   public cameraInfo() {
     return this.httpClient.get<CameraInfo>(
-      'http://localhost:3000/api/camera/info',
+      this._url('camera/info'),
       this._headers
     );
   }
 
   public cameraFeed() {
     return this.httpClient
-      .get('http://localhost:3000/api/camera/feed', {
+      .get(this._url('camera/feed'), {
         responseType: 'arraybuffer',
         ...this._headers,
       })
@@ -73,5 +73,9 @@ export class ApiService {
           return `data:image/jpeg;base64,${base64String}`;
         })
       );
+  }
+
+  private _url(path: string) {
+    return `${this._authService.targetAddress}/api/${path}`;
   }
 }

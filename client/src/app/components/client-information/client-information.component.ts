@@ -29,6 +29,10 @@ export class ClientInformationComponent {
     return this._authService.authKey;
   }
 
+  public get targetAddress() {
+    return this._authService.targetAddress;
+  }
+
   constructor(
     private _networkService: NetworkService,
     private _authService: AuthService

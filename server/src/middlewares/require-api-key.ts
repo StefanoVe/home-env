@@ -16,6 +16,8 @@ export const requireApiKey = (apiKey: string) => {
       return;
     }
 
+    log(`${timestamp} | ${route}`, 'info');
+
     next();
   };
 };
