@@ -4,6 +4,14 @@
   [class.boot-animation]="bootAnimation"
   @animateDestroy
 >
+  <div class="flex justify-center">
+    <button
+      class="font-poppins font-extrabold title-danger p-2 border border-red-500 rounded-lg m-2"
+      [routerLink]="['/home']"
+    >
+      GO HOME
+    </button>
+  </div>
   <div class="loading"></div>
   <div class="flex flex-col h-full justify-center">
     <div

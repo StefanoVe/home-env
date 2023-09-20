@@ -2,24 +2,12 @@
   <app-generic-popup title="navigation" subtitle="available routes">
     <nav class="flex flex-col py-2">
       <a
-        [routerLink]="['/home']"
+        *ngFor="let item of navItems$ | async"
+        [routerLink]="[item.path]"
+        [class.disabled]="item.disabled"
         class="px-2"
         routerLinkActive="bg-white text-black"
-        >HOME</a
-      >
-      <a
-        [routerLink]="['/config']"
-        class="px-2"
-        routerLinkActive="bg-white text-black"
-        >CONFIGURATION</a
-      >
-
-      <a
-        [class.disabled]="!(status | async)"
-        [routerLink]="['/camera']"
-        class="px-2"
-        routerLinkActive="bg-white text-black"
-        >CAMERA</a
+        >{{ item.name }}</a
       >
     </nav>
   </app-generic-popup>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { catchError, interval, startWith, switchMap } from 'rxjs';
+import { map } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { GenericPopupComponent } from 'src/app/shared/generic-popup/generic-popup.component';
 
@@ -12,22 +12,20 @@ import { GenericPopupComponent } from 'src/app/shared/generic-popup/generic-popu
   styleUrls: ['./server-information.component.scss'],
 })
 export class ServerInformationComponent {
-  public serverStatus$ = interval(1999).pipe(
-    startWith(0),
-    switchMap(() =>
-      this._api.ping().pipe(
-        catchError(async (err) => {
-          console.error(err);
-          return {
-            success: false,
-            uptime: 0,
-            version: '0.0.0',
-            ip: '0.0.0.0',
-            motd: 'Server is unavailable.',
-          };
-        })
-      )
-    )
+  public serverStatus$ = this._api.serverStatus$.pipe(
+    map((status) => {
+      if (!status) {
+        return {
+          success: false,
+          uptime: 0,
+          version: '0.0.0',
+          ip: '0.0.0.0',
+          motd: 'Server is unavailable.',
+        };
+      }
+
+      return status;
+    })
   );
 
   constructor(private _api: ApiService) {}

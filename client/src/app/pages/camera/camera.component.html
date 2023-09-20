@@ -32,7 +32,9 @@
         </app-generic-popup>
       </div>
       <div class="img-wrapper max-h-[50vh] lg:max-h-[70vh]">
-        <img [src]="camera" class="mx-auto w-full h-full" />
+        <a [href]="info.ip" target="popup">
+          <img [src]="camera" class="mx-auto w-full h-full" />
+        </a>
       </div>
     </ng-container>
   </app-generic-popup>

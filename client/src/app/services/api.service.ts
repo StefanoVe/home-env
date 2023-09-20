@@ -1,6 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, catchError, map, tap } from 'rxjs';
+import {
+  Subject,
+  catchError,
+  interval,
+  map,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { AuthService } from './auth.service';
 
 export interface CameraInfo {
@@ -28,7 +36,14 @@ export class ApiService {
   constructor(
     private httpClient: HttpClient,
     private _authService: AuthService
-  ) {}
+  ) {
+    interval(2000)
+      .pipe(
+        startWith(0),
+        switchMap(() => this.ping())
+      )
+      .subscribe();
+  }
 
   private _headers = {
     headers: new HttpHeaders({
@@ -42,7 +57,6 @@ export class ApiService {
       .pipe(
         catchError(async (err) => {
           this.serverStatus$.next(null);
-          throw new Error(err.message);
         }),
         tap((data) => {
           this.serverStatus$.next(data || null);

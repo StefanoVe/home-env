@@ -7,12 +7,13 @@ import {
 } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-loading',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
   animations: [

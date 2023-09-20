@@ -35105,7 +35105,14 @@ var axios_default = axios;
 
 // server/src/services/service.network.ts
 var getCurrentIP = async () => {
-  const currentIpRequest = await axios_default.get("https://api.ipify.org?format=json");
+  const currentIpRequest = await axios_default.get("https://api.ipify.org?format=json").catch((err) => {
+    log(`[!] Failed to get current IP: ${err.message}`, "error");
+    return {
+      data: {
+        ip: "UNAVAILABLE"
+      }
+    };
+  });
   return currentIpRequest.data.ip;
 };
 
@@ -35201,7 +35208,7 @@ class UptimeTracker {
 // server/src/index.ts
 var { PORT } = declareEnvs(["PORT"]);
 var _uptimeService = UptimeTracker.init(false);
-var currentVersion = "1.0.0";
+var currentVersion = "0.5.1";
 var main = async () => {
   log("[!] Starting application", "start");
   app.listen(PORT, () => {
