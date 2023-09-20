@@ -2,10 +2,10 @@ import { RequiredEnvVariableError } from './errors';
 
 export const declareEnvs = (envs: string[]) => {
   envs.forEach((name) => {
-    if (!process.env[name]) {
+    if (!Bun.env[name]) {
       throw new RequiredEnvVariableError(name);
     }
   });
 
-  return process.env as unknown as { [key: string]: string };
+  return Bun.env as unknown as { [key: string]: string };
 };

@@ -24,12 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/styles.scss",
-              "src/assets/css/ekko-lightbox.css",
-              "src/assets/css/font-awesome.min.css",
-              "src/assets/css/poi.css"
-            ],
+            "styles": ["src/styles.scss", "src/assets/css/poi.css"],
             "scripts": []
           },
           "configurations": {

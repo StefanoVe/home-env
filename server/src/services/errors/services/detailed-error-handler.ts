@@ -37,8 +37,8 @@ export const errorLogger = async (options: {
       ? `ERRORE ${options.errorContext}: ${error.message}`
       : `ERRORE ${options.errorContext}: <br /> ${JSON.stringify(error)}`;
 
-  const emailAdmin = process.env.EMAIL_ADMIN;
-  const emailModerator = process.env.EMAIL_MOD || '';
+  const emailAdmin = Bun.env.EMAIL_ADMIN;
+  const emailModerator = Bun.env.EMAIL_MOD || '';
 
   return message;
 };

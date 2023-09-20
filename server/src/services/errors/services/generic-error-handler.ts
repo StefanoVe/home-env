@@ -11,9 +11,9 @@ export const genericErrorHandler = async (error: Error, inviaMail = true) => {
       ? error.message
       : `Errore generico ${JSON.stringify(error)}`;
 
-  const emailAdmin = process.env.EMAIL_ADMIN;
-  const emailMod = process.env.EMAIL_MOD || '';
-  const produzione = 'true' === process.env.PRODUZIONE;
+  const emailAdmin = Bun.env.EMAIL_ADMIN;
+  const emailMod = Bun.env.EMAIL_MOD || '';
+  const produzione = 'true' === Bun.env.PRODUZIONE;
 
   throw new BadRequestError(message);
 };
