@@ -1,0 +1,26 @@
+<div class="my-5" *ngIf="authKey">
+  <app-generic-popup title="navigation" subtitle="available routes">
+    <nav class="flex flex-col py-2">
+      <a
+        [routerLink]="['/home']"
+        class="px-2"
+        routerLinkActive="bg-white text-black"
+        >HOME</a
+      >
+      <a
+        [routerLink]="['/config']"
+        class="px-2"
+        routerLinkActive="bg-white text-black"
+        >CONFIGURATION</a
+      >
+
+      <a
+        [class.disabled]="!(status | async)"
+        [routerLink]="['/camera']"
+        class="px-2"
+        routerLinkActive="bg-white text-black"
+        >CAMERA</a
+      >
+    </nav>
+  </app-generic-popup>
+</div>

@@ -1,0 +1,37 @@
+.machine.popup-container {
+  @apply border-2 border-white rounded-lg  mx-auto left-0 right-0 w-10/12 text-white uppercase font-poppins tracking-wider;
+
+  //   position: fixed;
+}
+
+.machine.warning {
+  @apply text-white tracking-[0.3rem]  font-extrabold drop-shadow-none my-auto;
+  transform: scale(1, 0.75);
+}
+
+.machine.popup-subtitle {
+  @apply text-black bg-gray-200 text-sm font-medium w-full px-2;
+}
+
+.machine.popup-header {
+  @apply flex flex-col bg-black rounded-t-md text-xl font-medium;
+}
+
+.machine.popup-body {
+  @apply backdrop-opacity-75 backdrop-grayscale backdrop-brightness-[0.25] backdrop-blur-sm;
+}
+
+.machine.popup-footer {
+  @apply flex bg-black pt-3 rounded-b-md text-xl;
+}
+
+.poi-rec {
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 0, 0, 0.8);
+  color: rgba(255, 0, 0, 0.8);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+  border-radius: 50%;
+  float: left;
+  margin: 2px 10px 0 0;
+}

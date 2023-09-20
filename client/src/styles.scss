@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+@keyframes popup-animation {
+  0% {
+    transform: scaleY(0.1) scaleX(1);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+.boot-animation {
+  animation: popup-animation 400ms ease-in-out;
+}
+
+.machine.warning {
+  @apply text-white tracking-[0.3rem]  font-extrabold drop-shadow-none my-auto;
+  transform: scale(1, 0.75);
+}
+
+.title-danger {
+  @apply text-red-500;
+
+  //apply dark red drop shadow color using scss
+  filter: drop-shadow(3px 1px 4px #b00202);
+}
+
+.title-success {
+  @apply text-green-500;
+
+  //apply dark green drop shadow color using scss
+  filter: drop-shadow(3px 1px 4px #0b6a0b);
+}
+
+.title-warning {
+  @apply text-yellow-300;
+
+  //apply dark yellow drop shadow color using scss
+  filter: drop-shadow(3px 1px 4px #ffd900);
+}
+
+.title-info {
+  @apply text-white;
+
+  //apply dark blue drop shadow color using scss
+  filter: drop-shadow(3px 1px 4px #d2d2d2);
+}
+
+.title-primary {
+  @apply text-blue-400;
+
+  //apply dark blue drop shadow color using scss
+  filter: drop-shadow(3px 1px 4px #1d48f6);
+}

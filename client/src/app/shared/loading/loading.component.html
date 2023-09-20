@@ -1,0 +1,16 @@
+<div
+  class="fixed h-screen w-screen bg-white z-[99] top-0 left-0"
+  *ngIf="!(destroy$ | async)"
+  [class.boot-animation]="bootAnimation"
+  @animateDestroy
+>
+  <div class="loading"></div>
+  <div class="flex flex-col h-full justify-center">
+    <div
+      id="loading-text"
+      class="text-center text-2xl font-bold font-poppins uppercase"
+    >
+      {{ message }}
+    </div>
+  </div>
+</div>

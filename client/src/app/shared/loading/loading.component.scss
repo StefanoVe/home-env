@@ -1,0 +1,89 @@
+@keyframes unfoldIn {
+  0% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+}
+
+.boot-animation {
+  animation: unfoldIn 400ms ease-in-out;
+}
+
+.done-animation {
+  animation: unfoldOut 400ms ease-in-out;
+}
+
+@keyframes poi-loading {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(0deg) rotateY(-360deg);
+  }
+}
+@-moz-keyframes poi-loading {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(0deg) rotateY(-360deg);
+  }
+}
+@-webkit-keyframes poi-loading {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  25% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+  }
+  100% {
+    transform: perspective(120px) rotateX(0deg) rotateY(-360deg);
+  }
+}
+
+.loading {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  top: 40%;
+  left: calc(50% - 50px);
+  background-image: url("/assets/img/threat.png");
+  background-size: 100% 100%;
+  z-index: 9999;
+  text-align: center;
+  animation: poi-loading 1.8s infinite ease-in-out;
+  -moz-animation: poi-loading 1.8s infinite ease-in-out;
+  -webkit-animation: poi-loading 1.8s infinite ease-in-out;
+}

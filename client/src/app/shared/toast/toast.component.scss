@@ -1,0 +1,9 @@
+.toast {
+  @apply fixed w-full h-10  z-[999] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+
+  & > .toast-content {
+    animation-duration: 200ms;
+    @apply bg-black border-2 border-white rounded-lg mx-5
+      font-poppins uppercase text-white text-xl font-bold tracking-widest;
+  }
+}

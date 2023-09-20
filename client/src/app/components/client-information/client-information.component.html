@@ -1,0 +1,13 @@
+<app-generic-popup title="client information" titleColor="info">
+  <div class="flex flex-col justify-center items-start space-y-4">
+    <div class="information-item">
+      <p>SOURCE: {{ (clientIP$ | async) || "fetching..." }}</p>
+      <p>target: [[placeholder]]</p>
+      <p>auth: "{{ authKey }}"</p>
+    </div>
+    <div class="information-item">
+      <p>CURRENT DATE: {{ currentDate$ | async }}</p>
+      <p>CURRENT TIME: {{ currentTime$ | async }}</p>
+    </div>
+  </div>
+</app-generic-popup>

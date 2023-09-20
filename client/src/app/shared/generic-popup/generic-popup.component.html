@@ -1,0 +1,25 @@
+<div class="machine popup-container boot-animation">
+  <div class="machine popup-header">
+    <h1 class="flex space-x-1 px-2 py-1 items-center">
+      <div *ngIf="decorator === 'warning'" class="machine warning">[!]</div>
+
+      <div *ngIf="decorator === 'recording'" class="relative px-1">
+        <div class="poi-rec my-auto"></div>
+        <div
+          class="poi-rec absolute animate-ping"
+          style="animation-duration: 2500ms"
+        ></div>
+      </div>
+
+      <span class="title-{{ titleColor }}">{{ title }}</span>
+    </h1>
+    <h2 *ngIf="subtitle?.length" class="machine popup-subtitle">
+      {{ subtitle }}
+    </h2>
+  </div>
+  <div class="machine popup-body">
+    <!-- dynamically host other components inside here -->
+    <ng-content class="h-full overflow-hidden relative w-full"></ng-content>
+  </div>
+  <div class="machine popup-footer"></div>
+</div>

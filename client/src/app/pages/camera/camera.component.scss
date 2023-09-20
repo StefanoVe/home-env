@@ -1,0 +1,13 @@
+.img-wrapper {
+  overflow: auto; /* adds scrollbars */
+
+  background-color: blue;
+  position: relative;
+}
+
+.img-wrapper > img {
+  height: 200%; /* probably looks neater if auto */
+  width: 200%; /* double width image to show only first quarter */
+  vertical-align: bottom; /* moves image to true text bottom */
+  aspect-ratio: 9 / 16; /* forces image to be square */
+}

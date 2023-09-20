@@ -1,0 +1,11 @@
+.wallpaper-background {
+  background-image: url("/assets/wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  scale: 1.1;
+  height: 100vh;
+  width: 100vw;
+
+  @apply fixed blur brightness-125 saturate-50;
+}
