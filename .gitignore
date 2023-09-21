@@ -5,3 +5,8 @@ dist
 
 .env
 .env.prod.json
+
+
+key.pem
+cert.pem
+csr.pem

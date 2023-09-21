@@ -15,4 +15,5 @@ app.use(express.json());
 app.use(requireApiKey(AUTH_KEY));
 
 app.use('/api', apiRouter);
+
 export { app };

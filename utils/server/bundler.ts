@@ -10,8 +10,10 @@ const fixNodeRequire = (code: string) => {
       'process.env'
     );
 
+  const _fs = result.includes('import fs from') ? '' : "import fs from 'fs';";
+
   return `
-  import fs from 'fs';
+  ${_fs}
   const env = fs.readFileSync('${Bun.env.SSH_SERVER_PATH}/${Bun.env.PRODUCTION_ENV_FILE}', 'utf-8');
   console.log(env);
   process.env = JSON.parse(env);

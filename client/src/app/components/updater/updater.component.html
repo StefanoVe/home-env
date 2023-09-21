@@ -1,1 +1,10 @@
-<p>updater works!</p>
+<div
+  *ngIf="showContent$ | async"
+  class="fixed w-screen h-screen backdrop-brightness-50 z-[9999] boot-animation top-0 left-0"
+>
+  <app-toast
+    message="Updating client..."
+    [showWarning]="true"
+    messageColor="info"
+  ></app-toast>
+</div>
