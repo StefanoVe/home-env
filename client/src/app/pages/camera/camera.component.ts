@@ -24,7 +24,6 @@ import { ToastComponent } from 'src/app/shared/toast/toast.component';
     LoadingComponent,
     ToastComponent,
   ],
-  providers: [ApiService],
   templateUrl: './camera.component.html',
   styleUrls: ['./camera.component.scss'],
 })
