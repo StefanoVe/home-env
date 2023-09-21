@@ -1,5 +1,5 @@
 .toast {
-  @apply fixed w-full h-10  z-[999] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  @apply absolute w-full h-10  z-[999] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mx-auto;
 
   & > .toast-content {
     animation-duration: 200ms;

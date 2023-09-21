@@ -42,7 +42,7 @@ export class ConfigComponent {
         subtitle: '',
       }
     : {
-        title: 'no initial config found',
+        title: 'config not found',
         decorator: 'warning',
         titleColor: 'warning',
         subtitle: 'enter your api key',

@@ -18,7 +18,6 @@ const main = async () => {
   if (Bun.env.ENV === 'production') {
     const dir = Bun.env.ENTRYPOINT_PATH;
     const key = fs.readFileSync(`${dir}/key.pem`);
-    console.log(key);
 
     const cert = fs.readFileSync(`${dir}/cert.pem`);
 

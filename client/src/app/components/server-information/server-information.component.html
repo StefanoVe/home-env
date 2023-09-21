@@ -1,14 +1,23 @@
 <ng-container *ngIf="serverStatus$ | async as status; else FetchingData">
   <app-generic-popup
-    title="System Information"
+    title="System data"
     titleColor="warning"
     [subtitle]="status.ip"
   >
     <div class="flex flex-col justify-center items-start space-y-4">
       <div class="information-item">
-        <p>MOTD: {{ status.motd }}</p>
-        <p>UPTIME: {{ uptimeFormatter(status.uptime) }}</p>
-        <p>VERSION: {{ status.version }}</p>
+        <p>
+          <span>MOTD:</span>
+          <span> {{ status.motd }} </span>
+        </p>
+        <p>
+          <span> UPTIME: </span>
+          <span> {{ uptimeFormatter(status.uptime) }} </span>
+        </p>
+        <p>
+          <span> VERSION:</span>
+          <span> {{ status.version }} </span>
+        </p>
       </div>
       <div class="information-item">
         <span class="title-{{ status.success ? 'success' : 'danger' }}">{{
@@ -20,10 +29,7 @@
 </ng-container>
 
 <ng-template #FetchingData>
-  <div class="relative">
-    <app-toast
-      [message]="'Fetching system information...'"
-      messageColor="warning"
-    ></app-toast>
+  <div class="relative w-9/12 m-auto h-full flex flex-col justify-center p-10">
+    <app-toast [message]="'Obtaining system data ...'"></app-toast>
   </div>
 </ng-template>

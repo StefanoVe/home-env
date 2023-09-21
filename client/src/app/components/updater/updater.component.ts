@@ -29,8 +29,8 @@ export class UpdaterComponent {
   }
 
   private _checkForUpdate(): void {
-    this._sw.checkForUpdate().then(() => {
-      this.updateAvailable$.next(true);
+    this._sw.checkForUpdate().then((r) => {
+      this.updateAvailable$.next(r);
     });
   }
 }
