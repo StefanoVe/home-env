@@ -1,7 +1,7 @@
 {
   "name": "home-hub-client",
   "short_name": "home-hub-client",
-  "theme_color": "#1976d2",
+  "theme_color": "#10141C",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
