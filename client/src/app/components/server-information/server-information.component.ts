@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { GenericPopupComponent } from 'src/app/shared/generic-popup/generic-popup.component';
+import { ToastComponent } from 'src/app/shared/toast/toast.component';
 
 @Component({
   selector: 'app-server-information',
   standalone: true,
-  imports: [CommonModule, GenericPopupComponent],
+  imports: [CommonModule, GenericPopupComponent,ToastComponent],
   templateUrl: './server-information.component.html',
   styleUrls: ['./server-information.component.scss'],
 })

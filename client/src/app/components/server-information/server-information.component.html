@@ -1,4 +1,4 @@
-<ng-container *ngIf="serverStatus$ | async as status">
+<ng-container *ngIf="serverStatus$ | async as status; else FetchingData">
   <app-generic-popup
     title="System Information"
     titleColor="warning"
@@ -18,3 +18,12 @@
     </div>
   </app-generic-popup>
 </ng-container>
+
+<ng-template #FetchingData>
+  <div class="relative">
+    <app-toast
+      [message]="'Fetching system information...'"
+      messageColor="warning"
+    ></app-toast>
+  </div>
+</ng-template>

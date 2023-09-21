@@ -21,14 +21,25 @@ export class NavComponent {
     { name: string; path: string; disabled: boolean }[]
   >([
     { name: 'Home', path: '/home', disabled: false },
+
+    {
+      name: 'camera',
+      path: '/camera',
+      disabled: false,
+    },
+    {
+      name: '‎',
+      path: '/separator-item',
+      disabled: true,
+    },
     {
       name: 'configuration',
       path: '/config',
       disabled: false,
     },
     {
-      name: 'camera',
-      path: '/camera',
+      name: 'logging',
+      path: '/logging',
       disabled: false,
     },
   ]);
@@ -42,14 +53,25 @@ export class NavComponent {
   public getNavItems(status: boolean) {
     return [
       { name: 'Home', path: '/home', disabled: false },
+
+      {
+        name: 'camera',
+        path: '/camera',
+        disabled: !status,
+      },
+      {
+        name: '‎ ',
+        path: '/separator-item',
+        disabled: true,
+      },
       {
         name: 'configuration',
         path: '/config',
         disabled: false,
       },
       {
-        name: 'camera',
-        path: '/camera',
+        name: 'logging',
+        path: '/logging',
         disabled: !status,
       },
     ];

@@ -1,17 +1,17 @@
 .background {
   display: table;
   width: 100%;
-  height: 100%;
+
   color: #000;
   line-height: 1.6;
-  position: relative;
   font-family: sans-serif;
   overflow: hidden;
   position: fixed;
   top: 0;
+  left: 0;
   z-index: -1;
 
-  @apply bg-gradient-to-br from-black to-gray-800 rotate-180;
+  @apply bg-gradient-to-br from-black to-gray-800 rotate-180 min-h-screen scale-105;
 }
 
 .lines {
