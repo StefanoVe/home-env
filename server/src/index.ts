@@ -16,10 +16,10 @@ const main = async () => {
   let _app: any = app;
 
   if (Bun.env.ENV === 'production') {
-    const dir = Bun.env.ENTRYPOINT_PATH;
-    const key = fs.readFileSync(`${dir}/key.pem`);
+    const dir = Bun.env.SSL_ENTRYPOINT_PATH;
+    const key = fs.readFileSync(`${dir}/privkey.pem`);
 
-    const cert = fs.readFileSync(`${dir}/cert.pem`);
+    const cert = fs.readFileSync(`${dir}/fullchain.pem`);
 
     const _sslApp = https.createServer(
       {

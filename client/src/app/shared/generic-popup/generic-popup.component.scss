@@ -14,7 +14,7 @@
 }
 
 .machine.popup-header {
-  @apply flex flex-col bg-black rounded-t-md text-xl font-medium;
+  @apply flex flex-col bg-black rounded-t-md lg:text-xl font-medium;
 }
 
 .machine.popup-body {

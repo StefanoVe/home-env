@@ -5,7 +5,12 @@
     [subtitle]="status.ip"
   >
     <div class="flex flex-col justify-center items-start space-y-4">
-      <div class="information-item">
+      <div class="information-item text-center">
+        <span class="title-{{ status.success ? 'success' : 'danger' }}">{{
+          status.success ? "CONNECTED" : "CONNECTION ERROR"
+        }}</span>
+      </div>
+      <div class="information-item" *ngIf="status.success">
         <p>
           <span>MOTD:</span>
           <span> {{ status.motd }} </span>
@@ -18,11 +23,6 @@
           <span> VERSION:</span>
           <span> {{ status.version }} </span>
         </p>
-      </div>
-      <div class="information-item">
-        <span class="title-{{ status.success ? 'success' : 'danger' }}">{{
-          status.success ? "CONNECTED" : "CONNECTION ERROR"
-        }}</span>
       </div>
     </div>
   </app-generic-popup>

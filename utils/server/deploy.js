@@ -40,15 +40,15 @@ const bundler = async () => {
         local: `${PRODUCTION_FOLDER}/${PRODUCTION_ENV_FILE}`,
         remote: `${SSH_SERVER_PATH}/${PRODUCTION_ENV_FILE}`,
       },
-      {
-        local: `${PRODUCTION_FOLDER}/${ssl.key}`,
-        remote: `${SSH_SERVER_PATH}/${ssl.key}`,
-      },
+      // {
+      //   local: `${PRODUCTION_FOLDER}/${ssl.key}`,
+      //   remote: `${SSH_SERVER_PATH}/${ssl.key}`,
+      // },
 
-      {
-        local: `${PRODUCTION_FOLDER}/${ssl.cert}`,
-        remote: `${SSH_SERVER_PATH}/${ssl.cert}`,
-      },
+      // {
+      //   local: `${PRODUCTION_FOLDER}/${ssl.cert}`,
+      //   remote: `${SSH_SERVER_PATH}/${ssl.cert}`,
+      // },
     ])
     .catch((err) => {
       console.log(err);
