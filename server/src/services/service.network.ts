@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { log } from './services.logs';
+import { log } from '../../../utils/service.logs';
 
 export const getCurrentIP = async () => {
   const currentIpRequest = await axios

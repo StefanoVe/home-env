@@ -4,10 +4,10 @@
   "type": "module",
   "scripts": {
     "server": "bun run --watch server/src/index.ts",
-    "client": "cd client && bunx ng serve",
     "deploy-server": "rm -rf dist/server && mkdir dist/server && bun run utils/server/bundler.ts && cp .env.prod.json dist/server && cp key.pem dist/server && cp cert.pem dist/server && npx env-cmd node utils/server/deploy.js",
-    "prod": "node dist/server/index.js",
-    "deploy-client": "rm -rf dist/client && cd client && bunx ng build && cd .. && cp -r client/dist/home-hub-client dist/client && cp Dockerfile dist/client && cp captain-definition dist/client && tar --strip-components=3 -cvf ./deploy.tar --exclude='*.map' ./dist/client/* && caprover deploy -t ./deploy.tar -n legio -a home-hub-client && rm ./deploy.tar"
+    "client": "cd client && bunx ng serve",
+    "deploy-client": "rm -rf dist/client && cd client && bunx ng build && cd .. && cp -r client/dist/home-hub-client dist/client && cp Dockerfile dist/client && cp captain-definition dist/client && tar --strip-components=3 -cvf ./deploy.tar --exclude='*.map' ./dist/client/* && caprover deploy -t ./deploy.tar -n legio -a home-hub-client && rm ./deploy.tar",
+    "proxy": "bun run --watch proxy/entry.ts"
   },
   "devDependencies": {
     "@types/node-ssh": "^7.0.1",

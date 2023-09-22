@@ -1,9 +1,9 @@
 import fs from 'fs';
 import https from 'https';
+import { log } from '../../utils/service.logs';
 import { app } from './routes/app';
 import { declareEnvs } from './services/service.envs';
 import { UptimeTracker } from './services/service.uptime';
-import { log } from './services/services.logs';
 
 const { PORT } = declareEnvs(['PORT']);
 

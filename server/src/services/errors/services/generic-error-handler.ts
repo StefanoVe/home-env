@@ -1,4 +1,4 @@
-import { log } from '../../services.logs';
+import { log } from '../../../../../utils/service.logs';
 import { BadRequestError } from '../specific';
 
 //aggiungere funzione che manda email di conferma operazione all'email che ha richiesto il servizio.

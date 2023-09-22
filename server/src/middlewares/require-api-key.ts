@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import { log } from '../../../utils/service.logs';
 import { NotAuthorizedError } from '../services/errors';
-import { log } from '../services/services.logs';
 
 /**
  * Wrapper di un middleware che richiede un API Key per accedere alla route a cui è applicato
