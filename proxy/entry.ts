@@ -17,5 +17,5 @@ app.use(proxy(Bun.env.PROXY_TARGET));
 
 //start the server
 app.listen(Bun.env.PROXY_PORT, () => {
-  console.log('bff is running on port 3000');
+  console.log(`proxy is running on port ${Bun.env.PROXY_PORT}`);
 });
