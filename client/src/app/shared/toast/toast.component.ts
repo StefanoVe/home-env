@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { IPopupTitleColor } from '../generic-popup/generic-popup.component';
+import { IToastColors } from 'src/app/interfaces/interface.toast';
 
 @Component({
   selector: 'app-toast',
@@ -12,5 +12,5 @@ import { IPopupTitleColor } from '../generic-popup/generic-popup.component';
 export class ToastComponent {
   @Input() message = 'NO MESSAGE';
   @Input() showWarning = false;
-  @Input() messageColor: IPopupTitleColor = 'info';
+  @Input() messageColor: IToastColors = 'info';
 }

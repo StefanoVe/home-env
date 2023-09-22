@@ -1,5 +1,9 @@
 <div class="my-5" *ngIf="authKey">
-  <app-generic-popup title="navigation" subtitle="available routes">
+  <app-generic-popup
+    title="navigation"
+    subtitle="available routes"
+    titleColor="primary"
+  >
     <nav class="flex flex-col py-2">
       <a
         *ngFor="let item of navItems$ | async"

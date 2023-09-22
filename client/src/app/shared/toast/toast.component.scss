@@ -4,6 +4,6 @@
   & > .toast-content {
     animation-duration: 200ms;
     @apply bg-black border-2 border-white rounded-lg mx-5
-      font-poppins uppercase text-white text-xl font-bold tracking-widest;
+      font-poppins uppercase text-white text-sm lg:text-xl font-bold tracking-widest whitespace-nowrap;
   }
 }

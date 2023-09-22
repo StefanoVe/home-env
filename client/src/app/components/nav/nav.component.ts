@@ -6,6 +6,12 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { GenericPopupComponent } from 'src/app/shared/generic-popup/generic-popup.component';
 
+interface NavItem {
+  name: string;
+  path: string;
+  disabled: boolean;
+}
+
 @Component({
   selector: 'app-nav',
   standalone: true,
@@ -17,14 +23,12 @@ export class NavComponent {
   public authKey = this._authService.authKey;
   public status$ = this._api.serverStatus$;
 
-  public navItems$ = new BehaviorSubject<
-    { name: string; path: string; disabled: boolean }[]
-  >([
-    { name: 'Home', path: '/home', disabled: false },
+  private _staticNavItems: NavItem[] = [
+    { name: 'status', path: '/home', disabled: false },
 
     {
-      name: 'camera',
-      path: '/camera',
+      name: 'printer',
+      path: '/printer',
       disabled: false,
     },
     {
@@ -38,11 +42,13 @@ export class NavComponent {
       disabled: false,
     },
     {
-      name: 'logging',
-      path: '/logging',
+      name: 'debug server',
+      path: '/debug',
       disabled: false,
     },
-  ]);
+  ];
+
+  public navItems$ = new BehaviorSubject<NavItem[]>(this._staticNavItems);
 
   constructor(private _authService: AuthService, private _api: ApiService) {
     this.status$.subscribe((status) => {
@@ -51,29 +57,15 @@ export class NavComponent {
   }
 
   public getNavItems(status: boolean) {
-    return [
-      { name: 'Home', path: '/home', disabled: false },
+    return this._staticNavItems.map((i) => {
+      if (['/printer', '/debug'].includes(i.path)) {
+        return {
+          ...i,
+          disabled: !status,
+        };
+      }
 
-      {
-        name: 'camera',
-        path: '/camera',
-        disabled: !status,
-      },
-      {
-        name: '‎ ',
-        path: '/separator-item',
-        disabled: true,
-      },
-      {
-        name: 'configuration',
-        path: '/config',
-        disabled: false,
-      },
-      {
-        name: 'logging',
-        path: '/logging',
-        disabled: !status,
-      },
-    ];
+      return i;
+    });
   }
 }

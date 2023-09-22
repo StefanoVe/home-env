@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {
-  Subject,
+  ReplaySubject,
   catchError,
   interval,
   map,
@@ -31,19 +32,8 @@ interface ServerStatus {
   providedIn: 'root',
 })
 export class ApiService {
-  public serverStatus$ = new Subject<ServerStatus | null>();
-
-  constructor(
-    private httpClient: HttpClient,
-    private _authService: AuthService
-  ) {
-    interval(2000)
-      .pipe(
-        startWith(0),
-        switchMap(() => this.ping())
-      )
-      .subscribe();
-  }
+  public pollingRate = 5000;
+  public serverStatus$ = new ReplaySubject<ServerStatus | null>(1);
 
   private _headers = {
     headers: new HttpHeaders({
@@ -51,13 +41,36 @@ export class ApiService {
     }),
   };
 
-  public ping() {
+  constructor(
+    private httpClient: HttpClient,
+    private _authService: AuthService,
+    private _router: Router
+  ) {
+    this.init();
+  }
+
+  public init() {
+    this._ping()
+      .pipe(
+        switchMap(() =>
+          interval(this.pollingRate).pipe(
+            startWith(0),
+            switchMap(() => this._ping())
+          )
+        ),
+        catchError(async (err) => {
+          console.error(err);
+          this._router.navigate(['/']);
+          this.serverStatus$.next(null);
+        })
+      )
+      .subscribe();
+  }
+
+  private _ping() {
     return this.httpClient
       .get<ServerStatus>(this._url('ping'), this._headers)
       .pipe(
-        catchError(async (err) => {
-          this.serverStatus$.next(null);
-        }),
         tap((data) => {
           this.serverStatus$.next(data || null);
         })
@@ -87,6 +100,18 @@ export class ApiService {
           return `data:image/jpeg;base64,${base64String}`;
         })
       );
+  }
+
+  public logs() {
+    return this.httpClient.get<string[]>(this._url('debug/logs'), {
+      ...this._headers,
+    });
+  }
+
+  public env() {
+    return this.httpClient.get<string[]>(this._url('debug/env'), {
+      ...this._headers,
+    });
   }
 
   private _url(path: string) {

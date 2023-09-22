@@ -7,12 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import {
-  GenericPopupComponent,
   IPopupDecorator,
   IPopupTitleColor,
-} from 'src/app/shared/generic-popup/generic-popup.component';
+} from 'src/app/interfaces/interface.popup';
+import { AuthService } from 'src/app/services/auth.service';
+import { GenericPopupComponent } from 'src/app/shared/generic-popup/generic-popup.component';
 import { LoadingComponent } from 'src/app/shared/loading/loading.component';
 
 @Component({

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-
-export type IPopupTitleColor = 'info' | 'warning' | 'danger' | 'success';
-export type IPopupDecorator = 'warning' | 'recording' | '';
+import {
+  IPopupDecorator,
+  IPopupTitleColor,
+} from 'src/app/interfaces/interface.popup';
 
 @Component({
   selector: 'app-generic-popup',

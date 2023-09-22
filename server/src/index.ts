@@ -1,17 +1,19 @@
 import fs from 'fs';
 import https from 'https';
-import { log } from '../../utils/service.logs';
 import { app } from './routes/app';
 import { declareEnvs } from './services/service.envs';
+import { wLog } from './services/service.logs';
+import { getCurrentIP } from './services/service.network';
 import { UptimeTracker } from './services/service.uptime';
 
 const { PORT } = declareEnvs(['PORT']);
 
 export const _uptimeService = UptimeTracker.init(false);
 export const currentVersion = '0.5.1';
+export const currentIP = await getCurrentIP();
 
 const main = async () => {
-  log('[!] Starting application', 'start');
+  wLog('[!] Starting application', 'start');
 
   let _app: any = app;
 
@@ -33,7 +35,7 @@ const main = async () => {
   }
 
   _app.listen(PORT, () => {
-    log(`[!] Listening on ${PORT}`, 'info');
+    wLog(`[!] Listening on ${PORT}`, 'info');
   });
 };
 

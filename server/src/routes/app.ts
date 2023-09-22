@@ -1,7 +1,7 @@
 //boilerplate for express
 import cors from 'cors';
 import express from 'express';
-import { requireApiKey } from '../middlewares/require-api-key';
+import { requireApiKey } from '../middlewares/middleware.api-key';
 import { declareEnvs } from '../services/service.envs';
 import { apiRouter } from './api';
 

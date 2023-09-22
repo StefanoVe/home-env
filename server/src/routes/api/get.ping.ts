@@ -1,8 +1,7 @@
 //boilerplate for an express route
 import express from 'express';
-import { _uptimeService, currentVersion } from '../..';
+import { _uptimeService, currentIP, currentVersion } from '../..';
 import { declareEnvs } from '../../services/service.envs';
-import { getCurrentIP } from '../../services/service.network';
 
 const { MOTD } = declareEnvs(['MOTD']);
 
@@ -13,7 +12,7 @@ router.get('/', async (req, res) => {
     success: true,
     motd: MOTD,
     uptime: _uptimeService.get,
-    ip: await getCurrentIP(),
+    ip: currentIP,
     version: currentVersion,
   });
 });

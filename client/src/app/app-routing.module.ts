@@ -20,10 +20,16 @@ const routes: Routes = [
       import('./pages/config/config.component').then((m) => m.ConfigComponent),
   },
   {
-    path: 'camera',
+    path: 'printer',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./pages/camera/camera.component').then((m) => m.CameraComponent),
+  },
+  {
+    path: 'debug',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/debug/debug.component').then((m) => m.DebugComponent),
   },
 ];
 

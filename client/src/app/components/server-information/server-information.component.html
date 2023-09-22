@@ -1,19 +1,42 @@
-<ng-container *ngIf="serverStatus$ | async as status; else FetchingData">
+<div
+  *ngIf="loading"
+  class="relative w-full lg:w-9/12 m-auto h-full flex flex-col justify-center p-10"
+>
+  <app-toast
+    *ngIf="toastConfig$ | async as conf"
+    [message]="conf.message"
+    [messageColor]="conf.color"
+  ></app-toast>
+</div>
+
+<ng-container *ngIf="serverStatus$ | async as status">
   <app-generic-popup
+    *ngIf="!loading"
     title="System data"
     titleColor="warning"
     [subtitle]="status.ip"
   >
     <div class="flex flex-col justify-center items-start space-y-4">
       <div class="information-item text-center">
-        <span class="title-{{ status.success ? 'success' : 'danger' }}">{{
-          status.success ? "CONNECTED" : "CONNECTION ERROR"
-        }}</span>
+        <span
+          class="title-{{ status.success ? 'success' : 'danger' }} text-lg "
+          >{{ status.success ? "CONNECTED" : "CONNECTION FAILED" }}</span
+        >
+      </div>
+
+      <div class="information-item flex justify-center" *ngIf="!status.success">
+        <button class="machine button" (click)="retryConnection()">
+          Retry
+        </button>
       </div>
       <div class="information-item" *ngIf="status.success">
         <p>
           <span>MOTD:</span>
           <span> {{ status.motd }} </span>
+        </p>
+        <p>
+          <span title="polling rate"> P-RATE:</span>
+          <span> {{ pollingRate }}ms </span>
         </p>
         <p>
           <span> UPTIME: </span>
@@ -27,9 +50,3 @@
     </div>
   </app-generic-popup>
 </ng-container>
-
-<ng-template #FetchingData>
-  <div class="relative w-9/12 m-auto h-full flex flex-col justify-center p-10">
-    <app-toast [message]="'Obtaining system data ...'"></app-toast>
-  </div>
-</ng-template>

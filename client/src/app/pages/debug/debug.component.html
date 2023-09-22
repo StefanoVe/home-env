@@ -1,0 +1,35 @@
+<div class="flex flex-col space-y-4">
+  <ng-container *ngIf="logs$ | async as logs">
+    <app-generic-popup
+      title="system LOGS"
+      titleColor="warning"
+      [subtitle]="'P-RATE: ' + pollingRate + 'ms'"
+      *ngIf="!loading"
+    >
+      <div
+        class="poi-terminal px-2 m-0 h-96 overflow-y-scroll hide-scrollbar"
+        #LogsContainer
+      >
+        <span
+          *ngFor="let log of logs"
+          [class.title-primary]="log.includes('GET')"
+          class="text-justify normal-case poi-prompt"
+        >
+          {{ log }}
+          <br />
+        </span>
+      </div>
+    </app-generic-popup>
+  </ng-container>
+
+  <ng-container *ngIf="env$ | async as env">
+    <app-generic-popup title="system ENV" titleColor="warning" *ngIf="!loading">
+      <div class="poi-terminal px-2 m-0 h-96 overflow-scroll">
+        <pre class="leading-6 whitespace-nowrap" *ngFor="let item of env">
+          <span class="font-extrabold"> {{item.key}}:</span>
+          <span class="opacity-50">{{item.value}}</span>
+        </pre>
+      </div>
+    </app-generic-popup>
+  </ng-container>
+</div>

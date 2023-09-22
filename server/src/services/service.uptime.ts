@@ -1,4 +1,5 @@
 import { BehaviorSubject, interval } from 'rxjs';
+import { wLog } from './service.logs';
 
 export class UptimeTracker {
   private _uptime$ = new BehaviorSubject<number>(0);
@@ -11,7 +12,7 @@ export class UptimeTracker {
         return;
       }
 
-      console.log(`Uptime: ${this._uptime$.value}`);
+      wLog(`Uptime: ${this._uptime$.value}`, 'info');
     });
   }
 

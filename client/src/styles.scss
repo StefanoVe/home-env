@@ -63,8 +63,12 @@
 }
 
 .title-primary {
-  @apply text-blue-400;
+  @apply text-blue-500;
 
   //apply dark blue drop shadow color using scss
   filter: drop-shadow(3px 1px 4px #1d48f6);
+}
+
+.machine.button {
+  @apply items-center border-2 border-white p-2 rounded-md font-medium tracking-wider px-4 bg-slate-900 hover:brightness-150 uppercase disabled:pointer-events-none disabled:opacity-50;
 }
