@@ -1,4 +1,4 @@
-import { log } from '../../../../../utils/service.logs';
+import { wLog } from '../../service.logs';
 import { BadRequestError } from '../specific';
 
 /**
@@ -30,7 +30,7 @@ export const errorLogger = async (options: {
 }) => {
   const error = options.error;
 
-  log(`${error} ${options.errorContext} - ${options.emailBody}`, 'error');
+  wLog(`${error} ${options.errorContext} - ${options.emailBody}`, 'error');
 
   const message =
     error && error.message

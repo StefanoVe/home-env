@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { wLog } from '../../service.logs';
 import { CustomError } from '../specific/custom-error';
 
 // Per come funzionano i middleware in Express, si veda:
@@ -25,6 +26,6 @@ export const errorHandler = (
   // perché potrebbe essere un qualunque errore generato dalla nostra app, quindi in questo
   // caso restituisco uno statusCode 400 ed un messaggio di errore generico
 
-  console.log(err);
+  wLog(JSON.stringify(err), 'error');
   return res.status(400).send({ errors: [{ message: 'Errore non gestito' }] });
 };
