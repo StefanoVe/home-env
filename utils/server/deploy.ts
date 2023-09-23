@@ -13,52 +13,47 @@ const {
 } = process.env;
 
 const ssh = new SSH.NodeSSH();
+console.log('connecting to production server...');
 
-const bundler = async () => {
-  console.log('connecting to production server...');
+const connection = await ssh.connect({
+  host: SSH_HOST,
+  username: SSH_USERNAME,
+  password: SSH_PASSWORD,
+});
 
-  const connection = await ssh.connect({
-    host: SSH_HOST,
-    username: SSH_USERNAME,
-    password: SSH_PASSWORD,
+console.log('connected to production server');
+console.log('uploading files...');
+
+await connection
+  .putFiles([
+    {
+      local: `${PRODUCTION_FOLDER}/${PRODUCTION_ENTRYPOINT_FILE}`,
+      remote: `${SSH_SERVER_PATH}/${PRODUCTION_ENTRYPOINT_FILE}`,
+    },
+    {
+      local: `${PRODUCTION_FOLDER}/${PRODUCTION_ENV_FILE}`,
+      remote: `${SSH_SERVER_PATH}/${PRODUCTION_ENV_FILE}`,
+    },
+  ])
+  .catch((err) => {
+    console.log(err);
   });
 
-  console.log('connected to production server');
-  console.log('uploading files...');
+console.log('uploaded!');
 
-  await connection
-    .putFiles([
-      {
-        local: `${PRODUCTION_FOLDER}/${PRODUCTION_ENTRYPOINT_FILE}`,
-        remote: `${SSH_SERVER_PATH}/${PRODUCTION_ENTRYPOINT_FILE}`,
-      },
-      {
-        local: `${PRODUCTION_FOLDER}/${PRODUCTION_ENV_FILE}`,
-        remote: `${SSH_SERVER_PATH}/${PRODUCTION_ENV_FILE}`,
-      },
-    ])
-    .catch((err) => {
-      console.log(err);
-    });
+log(
+  `current server folder: \n\t ${(
+    await connection.execCommand(`cd ${SSH_SERVER_PATH} && ls -a`)
+  ).stdout.replaceAll('\n', '\n\t')}`,
+  'info'
+);
 
-  console.log('uploaded!');
+console.log('cleaning up...');
 
-  log(
-    `current server folder: \n\t ${(
-      await connection.execCommand(`cd ${SSH_SERVER_PATH} && ls -a`)
-    ).stdout.replaceAll('\n', '\n\t')}`,
-    'info'
-  );
+if (SERVICE_RESTART_COMMAND) {
+  await connection.execCommand(SERVICE_RESTART_COMMAND);
+}
 
-  console.log('cleaning up...');
+ssh.dispose();
 
-  if (SERVICE_RESTART_COMMAND) {
-    await connection.execCommand(SERVICE_RESTART_COMMAND);
-  }
-
-  ssh.dispose();
-
-  log('Server deployed!', 'success');
-};
-
-bundler();
+log('Server deployed!', 'success');
