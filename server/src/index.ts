@@ -7,7 +7,7 @@ import { UptimeTracker } from './services/service.uptime';
 const { PORT } = declareEnvs(['PORT']);
 
 export const _uptimeService = UptimeTracker.init(false);
-export const currentVersion = '0.5.1';
+export const currentVersion = '0.5.3';
 export const currentIP = await getCurrentIP();
 
 const main = async () => {

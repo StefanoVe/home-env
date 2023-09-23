@@ -1,3 +1,5 @@
+import { log } from '../service.logs';
+
 const fixNodeRequire = (code: string) => {
   const result = code
     .replace(
@@ -39,5 +41,10 @@ _asyncForEach(result.outputs, async (file) => {
   const code = await file.text();
   const result = fixNodeRequire(code);
 
-  await Bun.write(file.path.replace('js', 'mjs'), result);
+  const path = file.path.replace('js', 'mjs');
+
+  await Bun.write(path, result);
+
+  console.log(`Wrote ${path}`);
+  log('Build done!', 'success');
 });

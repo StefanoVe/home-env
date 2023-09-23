@@ -1,4 +1,5 @@
 import * as SSH from 'node-ssh';
+import { log } from '../service.logs';
 
 const {
   PRODUCTION_FOLDER,
@@ -40,13 +41,24 @@ const bundler = async () => {
       console.log(err);
     });
 
-  console.log('files uploaded');
+  console.log('uploaded!');
 
-  await connection.execCommand(SERVICE_RESTART_COMMAND);
+  log(
+    `current server folder: \n\t ${(
+      await connection.execCommand(`cd ${SSH_SERVER_PATH} && ls -a`)
+    ).stdout.replaceAll('\n', '\n\t')}`,
+    'info'
+  );
+
+  console.log('cleaning up...');
+
+  if (SERVICE_RESTART_COMMAND) {
+    await connection.execCommand(SERVICE_RESTART_COMMAND);
+  }
 
   ssh.dispose();
 
-  return;
+  log('Server deployed!', 'success');
 };
 
 bundler();
