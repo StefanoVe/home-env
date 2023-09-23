@@ -36,13 +36,13 @@ export class ConfigComponent {
     subtitle: string;
   } = this._authService.authKey
     ? {
-        title: 'update config',
+        title: 'update configuration',
         decorator: '',
         titleColor: 'info',
         subtitle: '',
       }
     : {
-        title: 'config not found',
+        title: 'configuration not found',
         decorator: 'warning',
         titleColor: 'warning',
         subtitle: 'enter your api key',

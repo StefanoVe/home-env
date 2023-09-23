@@ -14,6 +14,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { GenericPopupComponent } from 'src/app/shared/generic-popup/generic-popup.component';
 import { LoadingComponent } from 'src/app/shared/loading/loading.component';
 import { ToastComponent } from 'src/app/shared/toast/toast.component';
+import { WarningDecoratorComponent } from 'src/app/shared/warning-decorator/warning-decorator.component';
 
 @Component({
   selector: 'app-camera',
@@ -23,6 +24,7 @@ import { ToastComponent } from 'src/app/shared/toast/toast.component';
     GenericPopupComponent,
     LoadingComponent,
     ToastComponent,
+    WarningDecoratorComponent,
   ],
   templateUrl: './camera.component.html',
   styleUrls: ['./camera.component.scss'],
@@ -39,10 +41,11 @@ export class CameraComponent {
   public destroyLoading$ = new Subject();
   public hasError$ = new Subject();
 
-  public camera$ = interval(this._requestWaitTime).pipe(
+  public camera$ = this._api.cameraFeed().pipe(
+    timeout(4000),
     takeUntil(this.hasError$),
     switchMap(() =>
-      this._api.cameraFeed().pipe(
+      interval(this._requestWaitTime).pipe(
         timeout({
           each: 1000,
           with: () =>
@@ -50,14 +53,14 @@ export class CameraComponent {
               new Error('timeout');
               this.hasError$.next(true);
             }),
-        }),
-        catchError(async (err) => {
-          console.error('something went wrong with the camera', err);
-          this.hasError$.next(true);
-          return '';
         })
       )
     ),
+    catchError(async (err) => {
+      console.error('something went wrong with the camera', err);
+      this.hasError$.next(true);
+      return '';
+    }),
     tap(() => this.destroyLoading$.next(true))
   );
 

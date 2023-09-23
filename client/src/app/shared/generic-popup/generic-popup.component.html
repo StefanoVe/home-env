@@ -1,7 +1,9 @@
 <div class="machine popup-container boot-animation">
   <div class="machine popup-header">
     <h1 class="flex space-x-1 px-2 py-1 items-center">
-      <div *ngIf="decorator === 'warning'" class="machine warning">[!]</div>
+      <app-warning-decorator
+        *ngIf="decorator === 'warning'"
+      ></app-warning-decorator>
 
       <div *ngIf="decorator === 'recording'" class="relative px-1">
         <div class="poi-rec my-auto"></div>

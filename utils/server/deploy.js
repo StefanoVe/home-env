@@ -11,11 +11,6 @@ const {
   SERVICE_RESTART_COMMAND,
 } = process.env;
 
-const ssl = {
-  key: 'key.pem',
-  cert: 'cert.pem',
-};
-
 const ssh = new SSH.NodeSSH();
 
 const bundler = async () => {
@@ -40,15 +35,6 @@ const bundler = async () => {
         local: `${PRODUCTION_FOLDER}/${PRODUCTION_ENV_FILE}`,
         remote: `${SSH_SERVER_PATH}/${PRODUCTION_ENV_FILE}`,
       },
-      // {
-      //   local: `${PRODUCTION_FOLDER}/${ssl.key}`,
-      //   remote: `${SSH_SERVER_PATH}/${ssl.key}`,
-      // },
-
-      // {
-      //   local: `${PRODUCTION_FOLDER}/${ssl.cert}`,
-      //   remote: `${SSH_SERVER_PATH}/${ssl.cert}`,
-      // },
     ])
     .catch((err) => {
       console.log(err);

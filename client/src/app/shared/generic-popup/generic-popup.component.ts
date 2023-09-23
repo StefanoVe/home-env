@@ -4,11 +4,12 @@ import {
   IPopupDecorator,
   IPopupTitleColor,
 } from 'src/app/interfaces/interface.popup';
+import { WarningDecoratorComponent } from '../warning-decorator/warning-decorator.component';
 
 @Component({
   selector: 'app-generic-popup',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WarningDecoratorComponent],
   templateUrl: './generic-popup.component.html',
   styleUrls: ['./generic-popup.component.scss'],
 })
