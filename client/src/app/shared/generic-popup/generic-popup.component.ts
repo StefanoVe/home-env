@@ -14,7 +14,7 @@ import { WarningDecoratorComponent } from '../warning-decorator/warning-decorato
   styleUrls: ['./generic-popup.component.scss'],
 })
 export class GenericPopupComponent {
-  @Input() title: string = 'PLACEHOLDER TITLE';
+  @Input() headerTitle: string = 'PLACEHOLDER TITLE';
   @Input() subtitle: string = '';
   @Input() decorator: IPopupDecorator = '';
   @Input() titleColor: IPopupTitleColor = 'info';

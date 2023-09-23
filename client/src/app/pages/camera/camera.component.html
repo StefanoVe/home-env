@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="cameraInfo$ | async as info">
   <app-generic-popup
-    title="Camera stream"
+    headerTitle="Camera stream"
     decorator="recording"
     [subtitle]="info.ip"
     class="relative"
@@ -11,7 +11,7 @@
       <div
         class="absolute scale-75 top-0 right-0 z-10 w-8/12 lg:w-4/12 text-xs lg:text-base"
       >
-        <app-generic-popup [title]="info.location" [subtitle]="info.name">
+        <app-generic-popup [headerTitle]="info.location" [subtitle]="info.name">
           <div class="flex flex-col space-y-2 p-2">
             <div class="space-x-2">
               <span class="font-bold">FPS:</span>

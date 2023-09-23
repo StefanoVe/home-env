@@ -1,7 +1,7 @@
 <div class="flex flex-col space-y-4">
   <ng-container *ngIf="logs$ | async as logs">
     <app-generic-popup
-      title="system LOGS"
+      headerTitle="system LOGS"
       titleColor="warning"
       [subtitle]="'P-RATE: ' + pollingRate + 'ms'"
       *ngIf="!loading"
@@ -27,7 +27,11 @@
   </ng-container>
 
   <ng-container *ngIf="env$ | async as env">
-    <app-generic-popup title="system ENV" titleColor="warning" *ngIf="!loading">
+    <app-generic-popup
+      headerTitle="system ENV"
+      titleColor="warning"
+      *ngIf="!loading"
+    >
       <div class="poi-terminal px-2 m-0 h-96 overflow-scroll">
         <pre class="leading-6 whitespace-nowrap" *ngFor="let item of env">
           <span class="font-extrabold"> {{item.key}}:</span>

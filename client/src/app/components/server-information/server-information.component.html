@@ -12,7 +12,7 @@
 <ng-container *ngIf="serverStatus$ | async as status">
   <app-generic-popup
     *ngIf="!loading"
-    title="System data"
+    headerTitle="System data"
     titleColor="warning"
     [subtitle]="status.ip"
   >
