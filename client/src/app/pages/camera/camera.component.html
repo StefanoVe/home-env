@@ -1,12 +1,5 @@
 <app-loading [destroy$]="destroyLoading$"></app-loading>
 
-<!-- <app-toast
-  *ngIf="hasError$ | async"
-  message="error while fetching camera feed"
-  [showWarning]="true"
-  messageColor="danger"
-></app-toast> -->
-
 <ng-container *ngIf="cameraInfo$ | async as info">
   <app-generic-popup
     title="Camera stream"
@@ -37,11 +30,12 @@
         </a>
       </div>
     </ng-container>
-    <ng-template #noFeed>
-      <div class="flex justify-center items-center">
-        <app-warning-decorator></app-warning-decorator>
-        <div class="p-2 title-danger">FEED not available</div>
-      </div>
-    </ng-template>
   </app-generic-popup>
 </ng-container>
+
+<ng-template #noFeed>
+  <div class="flex justify-center items-center" *ngIf="!loading">
+    <app-warning-decorator></app-warning-decorator>
+    <div class="p-2 title-danger">FEED not available</div>
+  </div>
+</ng-template>

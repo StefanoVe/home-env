@@ -4,10 +4,10 @@ import {
   Subject,
   catchError,
   interval,
+  startWith,
   switchMap,
   takeUntil,
   tap,
-  throwError,
   timeout,
 } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
@@ -30,6 +30,7 @@ import { WarningDecoratorComponent } from 'src/app/shared/warning-decorator/warn
   styleUrls: ['./camera.component.scss'],
 })
 export class CameraComponent {
+  public loading = true;
   private _requestWaitTime = 1000;
   public fps = 1000 / this._requestWaitTime;
   public cameraInfo$ = this._api.cameraInfo().pipe(
@@ -44,24 +45,21 @@ export class CameraComponent {
   public camera$ = this._api.cameraFeed().pipe(
     timeout(4000),
     takeUntil(this.hasError$),
+    tap(() => {
+      this.loading = false;
+      this.destroyLoading$.next(true);
+    }),
     switchMap(() =>
       interval(this._requestWaitTime).pipe(
-        timeout({
-          each: 1000,
-          with: () =>
-            throwError(() => {
-              new Error('timeout');
-              this.hasError$.next(true);
-            }),
-        })
+        startWith(0),
+        switchMap(() => this._api.cameraFeed())
       )
     ),
     catchError(async (err) => {
       console.error('something went wrong with the camera', err);
       this.hasError$.next(true);
       return '';
-    }),
-    tap(() => this.destroyLoading$.next(true))
+    })
   );
 
   constructor(private _api: ApiService) {}

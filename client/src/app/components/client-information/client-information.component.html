@@ -8,21 +8,26 @@
         </p>
       </ng-container>
       <p>
-        <span> target:</span>
+        <span>target:</span>
         <span class="truncate text-xs lg:text-sm whitespace-nowrap">
           {{ targetAddress }}</span
         >
       </p>
       <p>
-        <span> auth:</span> <span> "{{ authKey }}" </span>
+        <span>auth:</span> <span> "{{ authKey }}" </span>
       </p>
     </div>
     <div class="information-item">
       <p>
-        <span> CURRENT DATE:</span> <span> {{ currentDate$ | async }}</span>
+        <span>CURRENT DATE:</span> <span> {{ currentDate$ | async }}</span>
       </p>
       <p>
-        <span> CURRENT TIME:</span> <span>{{ currentTime$ | async }}</span>
+        <span>CURRENT TIME:</span> <span>{{ currentTime$ | async }}</span>
+      </p>
+    </div>
+    <div class="information-item">
+      <p>
+        <span>VERSION:</span> <span>{{ clientVersion }}</span>
       </p>
     </div>
   </div>

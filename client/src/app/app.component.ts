@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
+export const clientVersion = '1.0.0b';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'home-hub-client';
-
   public toggleDone = false;
 }
