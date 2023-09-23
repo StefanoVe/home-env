@@ -17,5 +17,7 @@ export const getCameraPath = async () => {
   const path = CAMERA_URL.split('/')[3];
   const hostIp = await getCurrentIP();
 
-  return `http://${hostIp}/${path}`;
+  const cPort = Bun.env.CAMERA_PUBLIC_PORT;
+
+  return `http://${hostIp}${cPort ? ':' + cPort : ''}/${path}`;
 };

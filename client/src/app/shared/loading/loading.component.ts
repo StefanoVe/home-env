@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./loading.component.scss'],
   animations: [
     trigger('animateDestroy', [
-      state('void', style({ transform: 'translateY(100%)' })),
+      state('void', style({ transform: 'translateX(100%)' })),
       transition('* => void', animate('500ms ease-in-out')),
     ]),
   ],
