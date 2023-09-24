@@ -57,4 +57,18 @@ export class DebugComponent {
     this._firstLoad = false;
     _e.scrollTop = _e.scrollHeight;
   }
+
+  public colorModifier(log: string): string {
+    const _log = log.toLowerCase();
+
+    if (['error', 'invalid'].some((x) => _log.includes(x))) {
+      return 'danger';
+    }
+
+    if (['get'].some((x) => _log.includes(x))) {
+      return 'primary';
+    }
+
+    return '';
+  }
 }

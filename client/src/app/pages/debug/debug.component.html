@@ -12,12 +12,7 @@
       >
         <span
           *ngFor="let log of logs"
-          [class.title-primary]="log.includes('GET')"
-          [class.title-error]="
-            log.toLowerCase().includes('ERROR') ||
-            log.toLowerCase().includes('INVALID')
-          "
-          class="text-justify poi-prompt font"
+          class="text-justify poi-prompt font title-{{ colorModifier(log) }}"
         >
           {{ log }}
           <br />

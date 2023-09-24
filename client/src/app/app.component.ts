@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-export const clientVersion = '1.0.2';
+export const clientVersion = '1.0.3';
 
 @Component({
   selector: 'app-root',
