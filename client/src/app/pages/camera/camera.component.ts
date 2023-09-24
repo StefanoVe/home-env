@@ -45,14 +45,14 @@ export class CameraComponent {
   public camera$ = this._api.cameraFeed().pipe(
     timeout(4000),
     takeUntil(this.hasError$),
-    tap(() => {
-      this.loading = false;
-      this.destroyLoading$.next(true);
-    }),
     switchMap(() =>
       interval(this._requestWaitTime).pipe(
         startWith(0),
-        switchMap(() => this._api.cameraFeed())
+        switchMap(() => this._api.cameraFeed()),
+        tap(() => {
+          this.loading = false;
+          this.destroyLoading$.next(true);
+        })
       )
     ),
     catchError(async (err) => {
