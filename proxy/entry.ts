@@ -15,6 +15,15 @@ app.use(cors());
 app.use(log);
 app.use(proxy(Bun.env.PROXY_TARGET));
 
+app.post('/target', async (req, res) => {
+  if(req.query.AUTH !== Bun.env.AUTH)
+  {
+    throw new Error('invalid auth!')
+  }
+
+  //distruggi proxy(...) e creane uno nuovo con il nuovo ip
+});
+
 //start the server
 app.listen(Bun.env.PROXY_PORT, () => {
   console.log(`proxy is running on port ${Bun.env.PROXY_PORT}`);
