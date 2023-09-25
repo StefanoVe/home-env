@@ -3,15 +3,21 @@ import { interval, startWith, tap } from 'rxjs';
 import { declareEnvs } from './service.envs';
 import { wLog } from './service.logs';
 
-const { PROXY_TARGET } = declareEnvs(['PROXY_TARGET']);
+const { PROXY_URL, ENV } = declareEnvs(['PROXY_URL', 'ENV']);
 export class NetworkClass {
-  private _pollingRate = 5000; //7200000; //2 ore
+  private _pollingRate = 7200000; //2 ore
   private _currentIP: string | null = null;
   private _latestIP: string | null = null;
+
   private _refreshIP$ = interval(this._pollingRate).pipe(
     startWith(0),
     tap(async () => {
       await this._setCurrentIP();
+
+      if (ENV !== 'production') {
+        return;
+      }
+
       await this._setProxyTarget();
     })
   );
@@ -60,7 +66,7 @@ export class NetworkClass {
     wLog(`Pointing proxy to ${this._currentIP}`, 'info');
 
     const result = await axios
-      .post(`${Bun.env.PROXY_URL}/target?AUTH=${Bun.env.PROXY_AUTH}`, {
+      .post(`${PROXY_URL}/target?AUTH=${Bun.env.PROXY_AUTH}`, {
         ip: this._currentIP,
       })
       .catch((e) => {
