@@ -12,13 +12,14 @@ const app = express();
 
 //add middleware
 app.use(cors());
+app.use(express.json());
 
 app.post('/target', async (req, res) => {
   if (req.query.AUTH !== Bun.env.PROXY_AUTH) {
     throw new Error('invalid auth!');
   }
 
-  console.log('target updated');
+  console.log('target updated to ', req.body.ip);
   //TODO distruggi proxy(...) e creane uno nuovo con il nuovo ip
   res.send({ status: 'success' });
 });

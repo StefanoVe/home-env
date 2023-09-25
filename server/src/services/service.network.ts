@@ -54,12 +54,14 @@ export class NetworkClass {
       return;
     }
 
+    wLog(`Pointing proxy to ${this._currentIP}`, 'info');
+
     const result = await axios
       .post(`${Bun.env.PROXY_URL}/target?AUTH=${Bun.env.PROXY_AUTH}`, {
         ip: this._currentIP,
       })
       .catch(genericErrorHandler);
 
-    wLog('proxy target updated!', 'success');
+    wLog('Proxy target updated!', 'success');
   }
 }

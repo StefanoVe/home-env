@@ -9,7 +9,7 @@ import {
   startWith,
   switchMap,
   tap,
-  timeout
+  timeout,
 } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -53,6 +53,7 @@ export class ApiService {
   public init() {
     this._ping()
       .pipe(
+        //TODO testa il timeout
         timeout(10000),
         switchMap(() =>
           interval(this.pollingRate).pipe(

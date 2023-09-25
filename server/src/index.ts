@@ -14,7 +14,7 @@ const main = async () => {
   wLog('[!] Starting application', 'start');
 
   app.listen(PORT, () => {
-    wLog(`[!] Listening on ${PORT}`, 'info');
+    wLog(`Listening on ${PORT}`, 'info');
   });
 };
 
