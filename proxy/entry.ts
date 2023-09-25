@@ -2,32 +2,37 @@ import cors from 'cors';
 import express from 'express';
 import proxy from 'express-http-proxy';
 import log from './middlewares/middleware.log';
+import { postTargetRouter } from './routes/post.target';
 
-if (!Bun.env.PROXY_TARGET) {
-  throw new Error('PROXY_TARGET is not set');
-}
+export let instance: ReturnType<typeof main> | null = null;
+export let targetValue: string | null = null;
 
-//init an express app
-const app = express();
+export const main = (target: string) => {
+  targetValue = target;
 
-//add middleware
-app.use(cors());
-app.use(express.json());
+  //init an express app
+  const app = express();
+  //add middleware
+  app.use(cors());
+  app.use(express.json());
 
-app.post('/target', async (req, res) => {
-  if (req.query.AUTH !== Bun.env.PROXY_AUTH) {
-    throw new Error('invalid auth!');
-  }
+  //configuro una route per aggiornare il target del proxy
+  app.use('/target', postTargetRouter);
 
-  console.log('target updated to ', req.body.ip);
-  //TODO distruggi proxy(...) e creane uno nuovo con il nuovo ip
-  res.send({ status: 'success' });
-});
+  //aggiungo il resto dei middlewares
+  app.use(log);
+  app.use(proxy(target));
 
-app.use(log);
-app.use(proxy(Bun.env.PROXY_TARGET));
+  //start the server
+  const _instance = app.listen(Bun.env.PROXY_PORT, () => {
+    console.log(
+      `Proxy is running on port ${Bun.env.PROXY_PORT}, target: ${target}`
+    );
+  });
 
-//start the server
-app.listen(Bun.env.PROXY_PORT, () => {
-  console.log(`proxy is running on port ${Bun.env.PROXY_PORT}`);
-});
+  instance = _instance;
+
+  return _instance;
+};
+
+main(Bun.env.PROXY_TARGET || 'http://localhost:3000');

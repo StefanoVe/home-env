@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { interval, startWith, tap } from 'rxjs';
-import { genericErrorHandler } from './errors';
+import { declareEnvs } from './service.envs';
 import { wLog } from './service.logs';
 
+const { PROXY_TARGET } = declareEnvs(['PROXY_TARGET']);
 export class NetworkClass {
-  private _pollingRate = 7200000; //2 ore
-  private _currentIP: string = '';
-  private _latestIP = '';
+  private _pollingRate = 5000; //7200000; //2 ore
+  private _currentIP: string | null = null;
+  private _latestIP: string | null = null;
   private _refreshIP$ = interval(this._pollingRate).pipe(
     startWith(0),
     tap(async () => {
@@ -29,7 +30,9 @@ export class NetworkClass {
 
     //ottengo il nuovo IP
     const { data } = await axios
-      .get<{ ip: string }>('https://api.ipify.org?format=json')
+      .get<{ ip: string }>(
+        `https://api.ipify.org?format=json&random=${Math.random() * 1000}}`
+      )
       .catch((err) => {
         wLog(`[!] Failed to get current IP: ${err.message}`, 'error');
         return {
@@ -39,16 +42,16 @@ export class NetworkClass {
         };
       });
 
-    if (!data.ip) {
-      return;
-    }
-
     //assegno il nuovo IP a _currenIP
     this._currentIP = data.ip;
-    wLog('IP refreshed!', 'success');
+    wLog('IP refreshed!, current ip is ' + this._currentIP, 'success');
   }
 
   private async _setProxyTarget() {
+    if (!this._currentIP) {
+      return;
+    }
+
     if (this._currentIP === this._latestIP) {
       wLog('no need to update proxy target', 'info');
       return;
@@ -60,8 +63,15 @@ export class NetworkClass {
       .post(`${Bun.env.PROXY_URL}/target?AUTH=${Bun.env.PROXY_AUTH}`, {
         ip: this._currentIP,
       })
-      .catch(genericErrorHandler);
+      .catch((e) => {
+        wLog(`[!] Failed to update proxy target: ${e.message}`, 'error');
+        return { data: { status: 'error' } };
+      });
 
-    wLog('Proxy target updated!', 'success');
+    if (result.data.status !== 'success') {
+      return;
+    }
+
+    wLog('Proxy target updated!', 'warning');
   }
 }

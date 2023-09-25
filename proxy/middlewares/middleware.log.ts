@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { targetValue } from '../entry';
 const { log } = require('../../utils/service.logs');
 
 export default function pathLogging(
@@ -6,6 +7,6 @@ export default function pathLogging(
   res: Response,
   next: NextFunction
 ) {
-  log(`Routing ${req.method} ${req.url} to ${Bun.env.PROXY_TARGET}`, 'info');
+  log(`Routing ${req.method} ${req.url} to ${targetValue}`, 'info');
   next();
 }
