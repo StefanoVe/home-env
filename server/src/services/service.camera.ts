@@ -16,7 +16,7 @@ export const getCameraFeed = async () => {
   return request.data;
 };
 
-export const getCameraPath = async () => {
+export const getCameraPath = () => {
   const path = CAMERA_URL.split('/')[3];
 
   const cPort = CAMERA_PUBLIC_PORT;
