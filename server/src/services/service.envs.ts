@@ -7,5 +7,5 @@ export const declareEnvs = (envs: string[]) => {
     }
   });
 
-  return Bun.env as unknown as { [key: string]: string };
+  return Bun.env as { [key: string]: string };
 };

@@ -3,7 +3,11 @@ import { interval, startWith, tap } from 'rxjs';
 import { declareEnvs } from './service.envs';
 import { wLog } from './service.logs';
 
-const { PROXY_URL, ENV } = declareEnvs(['PROXY_URL', 'ENV']);
+const { PROXY_URL, ENV, PROXY_AUTH } = declareEnvs([
+  'PROXY_URL',
+  'ENV',
+  'PROXY_AUTH',
+]);
 export class NetworkClass {
   private _pollingRate = 7200000; //2 ore
   private _currentIP: string | null = null;
@@ -55,18 +59,21 @@ export class NetworkClass {
 
   private async _setProxyTarget() {
     if (!this._currentIP) {
+      //se l'ip è null esco
       return;
     }
 
     if (this._currentIP === this._latestIP) {
+      //se l'ip è uguale a quello precedente esco
       wLog('no need to update proxy target', 'info');
       return;
     }
 
     wLog(`Pointing proxy to ${this._currentIP}`, 'info');
 
+    //chiamo il proxy per aggiornare il target passando l'auth key
     const result = await axios
-      .post(`${PROXY_URL}/target?AUTH=${Bun.env.PROXY_AUTH}`, {
+      .post(`${PROXY_URL}/target?AUTH=${PROXY_AUTH}`, {
         ip: this._currentIP,
       })
       .catch((e) => {

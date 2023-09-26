@@ -12,13 +12,14 @@ router.post('/', async (req, res) => {
 
   console.log('target updated to ', _target);
 
+  //riavvio l'istanza express
   instance?.close(() => {
     console.log('instance closed, starting duplicate');
     instance?.closeAllConnections();
     main(_target);
   });
 
-  res.send({ status: 'success' });
+  res.send({ status: 'success', ip: _target });
 });
 
 export { router as postTargetRouter };
