@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     name: 'bambu_camera_01',
     location: 'LAB',
     resolution: '1080x1920',
-    ip: await getCameraPath(),
+    ip: getCameraPath(),
   });
 });
 

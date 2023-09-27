@@ -3,7 +3,10 @@ import { _networkService } from '..';
 import { genericErrorHandler } from './errors';
 import { declareEnvs } from './service.envs';
 
-const { CAMERA_URL } = declareEnvs(['CAMERA_URL']);
+const { CAMERA_URL, CAMERA_PUBLIC_PORT } = declareEnvs([
+  'CAMERA_URL',
+  'CAMERA_PUBLIC_PORT',
+]);
 
 export const getCameraFeed = async () => {
   const request = await axios
@@ -13,10 +16,10 @@ export const getCameraFeed = async () => {
   return request.data;
 };
 
-export const getCameraPath = async () => {
+export const getCameraPath = () => {
   const path = CAMERA_URL.split('/')[3];
 
-  const cPort = Bun.env.CAMERA_PUBLIC_PORT;
+  const cPort = CAMERA_PUBLIC_PORT;
 
   return `http://${_networkService.ip}${cPort ? ':' + cPort : ''}/${path}`;
 };
