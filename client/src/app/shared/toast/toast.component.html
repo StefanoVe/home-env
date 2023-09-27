@@ -2,9 +2,12 @@
   <div class="toast-content boot-animation">
     <div class="h-full flex px-2 space-x-1">
       <span class="machine warning" *ngIf="showWarning">[!]</span>
-      <span class="title-{{ messageColor }} p-1">
+      <span class="title-{{ messageColor }} p-1 my-auto">
         {{ message }}
       </span>
+    </div>
+    <div class="machine toast-subtitle my-0.5" *ngIf="subtitle">
+      {{ subtitle }}
     </div>
   </div>
 </div>

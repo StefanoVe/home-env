@@ -11,6 +11,7 @@ import { IToastColors } from 'src/app/interfaces/interface.toast';
 })
 export class ToastComponent {
   @Input() message = 'NO MESSAGE';
+  @Input() subtitle: string | null = null;
   @Input() showWarning = false;
   @Input() messageColor: IToastColors = 'info';
 }

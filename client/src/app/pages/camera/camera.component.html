@@ -9,7 +9,7 @@
   >
     <ng-container *ngIf="camera$ | async as camera; else noFeed">
       <div
-        class="absolute scale-75 top-0 right-0 z-10 w-8/12 lg:w-4/12 text-xs lg:text-base"
+        class="absolute scale-75 top-0 right-0 z-10 w-8/12 lg:w-4/12 text-xs lg:text-base space-y-8"
       >
         <app-generic-popup [headerTitle]="info.location" [subtitle]="info.name">
           <div class="flex flex-col space-y-2 p-2">
@@ -23,11 +23,17 @@
             </div>
           </div>
         </app-generic-popup>
+        <div class="relative">
+          <a
+            [href]="info.ip.replace('image.jpg', 'video.mjpg')"
+            target="_blank"
+          >
+            <app-toast message="access feed" messageColor="primary"></app-toast>
+          </a>
+        </div>
       </div>
       <div class="img-wrapper max-h-[50vh] lg:max-h-[70vh]">
-        <a [href]="info.ip" target="popup">
-          <img [src]="camera" class="mx-auto w-full h-full" />
-        </a>
+        <img [src]="camera" class="mx-auto w-full h-full" />
       </div>
     </ng-container>
   </app-generic-popup>
