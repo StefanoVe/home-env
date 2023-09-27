@@ -3,7 +3,7 @@ import { interval, startWith, tap } from 'rxjs';
 import { declareEnvs } from './service.envs';
 import { wLog } from './service.logs';
 
-const { PROXY_URL, ENV } = declareEnvs(['PROXY_URL', 'ENV']);
+const { PROXY_URL, ENV, PORT } = declareEnvs(['PROXY_URL', 'ENV', 'PORT']);
 export class NetworkClass {
   private _pollingRate = 7200000; //2 ore
   private _currentIP: string | null = null;
@@ -49,7 +49,7 @@ export class NetworkClass {
       });
 
     //assegno il nuovo IP a _currenIP
-    this._currentIP = data.ip;
+    this._currentIP = `${data.ip}:${PORT}`;
     wLog('IP refreshed!, current ip is ' + this._currentIP, 'success');
   }
 
