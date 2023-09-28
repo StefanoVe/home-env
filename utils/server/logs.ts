@@ -14,7 +14,7 @@ const connection = await ssh.connect({
 
 console.log('connected to production server');
 
-connection.exec('sudo journalctl ', ['-f', '-u', 'home-hub'], {
+connection.exec('sudo journalctl', ['-f', '-u', 'home-hub'], {
   stream: 'stdout',
   onStdout: (chunk) => {
     console.log(chunk.toString('utf8'));
