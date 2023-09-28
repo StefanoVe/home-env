@@ -6,6 +6,7 @@
     "server": "bun run --watch server/src/index.ts",
     "bundle-server": "rm -rf dist/server && mkdir dist/server && bun run utils/server/bundler.ts",
     "deploy-server": "bun bundle-server && cp .env.prod.json dist/server && bun utils/server/deploy.ts",
+    "server-logs": "bun utils/server/logs.ts",
     "client": "cd client && bunx ng serve",
     "deploy-client": "rm -rf dist/client && cd client && bunx ng build && cd .. && cp -r client/dist/home-hub-client dist/client && cp client.Dockerfile dist/client && mv dist/client/client.Dockerfile dist/client/Dockerfile && cp captain-definition dist/client && tar --strip-components=3 -cvf ./deploy.tar --exclude='*.map' ./dist/client/* && caprover deploy -t ./deploy.tar -n legio -a home-hub-client && rm ./deploy.tar",
     "proxy": "bun run --watch proxy/entry.ts",
