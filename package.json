@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "server": "bun run --watch server/src/index.ts",
-    "bundle-server": "rm -rf dist/server && mkdir dist/server && bun run utils/server/bundler.ts",
+    "bundle-server": "rm -rf dist/server && mkdir dist/server && bun run utils/server/bundle.ts",
     "deploy-server": "bun bundle-server && cp .env.prod.json dist/server && bun utils/server/deploy.ts",
     "server-logs": "bun utils/server/logs.ts",
     "client": "cd client && bunx ng serve",
