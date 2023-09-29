@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
-export const clientVersion = '1.0.5';
+export const clientVersion = '1.0.6';
 
 @Component({
   selector: 'app-root',
