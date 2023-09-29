@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {
   ReplaySubject,
   catchError,
+  concatMap,
   interval,
   map,
   startWith,
@@ -58,7 +59,7 @@ export class ApiService {
         switchMap(() =>
           interval(this.pollingRate).pipe(
             startWith(0),
-            switchMap(() => this._ping())
+            concatMap(() => this._ping())
           )
         ),
         catchError(async (err) => {

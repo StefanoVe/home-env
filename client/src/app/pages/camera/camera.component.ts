@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {
   Subject,
   catchError,
+  concatMap,
   interval,
   startWith,
   switchMap,
@@ -48,7 +49,7 @@ export class CameraComponent {
     switchMap(() =>
       interval(this._requestWaitTime).pipe(
         startWith(0),
-        switchMap(() => this._api.cameraFeed()),
+        concatMap(() => this._api.cameraFeed()),
         tap(() => {
           this.loading = false;
           this.destroyLoading$.next(true);
