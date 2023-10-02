@@ -23,19 +23,25 @@ export class NavComponent {
   public authKey = this._authService.authKey;
   public status$ = this._api.serverStatus$;
 
+  private _separator: NavItem =   {
+    name: '‎',
+    path: '/separator-item',
+    disabled: true,
+  }
+
   private _staticNavItems: NavItem[] = [
     { name: 'status', path: '/home', disabled: false },
-
     {
       name: 'printer',
       path: '/printer',
       disabled: false,
     },
     {
-      name: '‎',
-      path: '/separator-item',
+      name: 'homebridge',
+      path: '/homebridge',
       disabled: true,
     },
+    this._separator,
     {
       name: 'configuration',
       path: '/config',
