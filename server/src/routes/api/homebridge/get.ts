@@ -1,14 +1,14 @@
 import express from 'express';
-import { getCameraPath } from '../../../services/service.camera';
+import { _networkService } from '../../..';
+import { declareEnvs } from '../../../services/service.envs';
 
-
-const {HOMEBRIDGE_PORT} = declareEnvs(['HOMEBRIDGE_PORT'])
+const { HOMEBRIDGE_PORT } = declareEnvs(['HOMEBRIDGE_PORT']);
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   res.send({
-    ip: `${networkService.ip}:${HOMEBRIDGE_PORT}` 
+    ip: `${_networkService.baseIp}:${HOMEBRIDGE_PORT}`,
   });
 });
 

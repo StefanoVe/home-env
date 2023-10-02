@@ -21,7 +21,5 @@ export const getCameraPath = () => {
 
   const cPort = CAMERA_PUBLIC_PORT;
 
-  return `http://${_networkService.ip?.split(':')[0]}${
-    cPort ? ':' + cPort : ''
-  }/${path}`;
+  return `http://${_networkService.baseIp}${cPort ? ':' + cPort : ''}/${path}`;
 };

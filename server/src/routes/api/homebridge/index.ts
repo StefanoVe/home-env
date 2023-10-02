@@ -1,8 +1,8 @@
 import express from 'express';
-import {getHomebridgeDataRouter} from './get';
+import { getHomebridgeDataRouter } from './get';
 
 const router = express.Router();
 
-router.use('/', getHomebridgeDataRotuer);
+router.use('/', getHomebridgeDataRouter);
 
 export { router as homebridgeRouter };

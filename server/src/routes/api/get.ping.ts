@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     success: true,
     motd: MOTD,
     uptime: _uptimeService.get,
-    ip: _networkService.ip,
+    ip: _networkService.fullIp,
     version: currentVersion,
   });
 });

@@ -3,7 +3,12 @@ import { interval, startWith, tap } from 'rxjs';
 import { declareEnvs } from './service.envs';
 import { wLog } from './service.logs';
 
-const { PROXY_URL, ENV, PORT, PROXY_AUTH } = declareEnvs(['PROXY_URL', 'ENV', 'PORT','PROXY_AUTH']);
+const { PROXY_URL, ENV, PORT, PROXY_AUTH } = declareEnvs([
+  'PROXY_URL',
+  'ENV',
+  'PORT',
+  'PROXY_AUTH',
+]);
 export class NetworkClass {
   private _pollingRate = 7200000; //2 ore
   private _currentIP: string | null = null;
@@ -22,8 +27,12 @@ export class NetworkClass {
     })
   );
 
-  public get ip() {
+  public get fullIp() {
     return this._currentIP;
+  }
+
+  public get baseIp() {
+    return this._currentIP?.split(':')[0];
   }
 
   constructor() {

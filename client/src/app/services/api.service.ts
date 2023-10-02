@@ -118,6 +118,12 @@ export class ApiService {
     });
   }
 
+  public homebridgeData() {
+    return this.httpClient.get<{ ip: string }>(this._url('homebridge'), {
+      ...this._headers,
+    });
+  }
+
   private _url(path: string) {
     return `${this._authService.targetAddress}/api/${path}`;
   }

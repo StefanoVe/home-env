@@ -23,11 +23,11 @@ export class NavComponent {
   public authKey = this._authService.authKey;
   public status$ = this._api.serverStatus$;
 
-  private _separator: NavItem =   {
+  private _separator: NavItem = {
     name: '‎',
     path: '/separator-item',
     disabled: true,
-  }
+  };
 
   private _staticNavItems: NavItem[] = [
     { name: 'status', path: '/home', disabled: false },
@@ -39,7 +39,7 @@ export class NavComponent {
     {
       name: 'homebridge',
       path: '/homebridge',
-      disabled: true,
+      disabled: false,
     },
     this._separator,
     {
@@ -64,7 +64,7 @@ export class NavComponent {
 
   public getNavItems(status: boolean) {
     return this._staticNavItems.map((i) => {
-      if (['/printer', '/debug'].includes(i.path)) {
+      if (['/printer', '/debug', '/homebridge'].includes(i.path)) {
         return {
           ...i,
           disabled: !status,

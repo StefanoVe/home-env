@@ -1,0 +1,13 @@
+<ng-container *ngIf="data$ | async as data">
+  <app-generic-popup
+    headerTitle="iframe"
+    decorator="recording"
+    [subtitle]="data.ip"
+  >
+    <iframe
+      [src]="data.url"
+      frameborder="0"
+      class="w-full h-screen overflow-auto"
+    ></iframe>
+  </app-generic-popup>
+</ng-container>
