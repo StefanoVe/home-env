@@ -5,24 +5,29 @@ import { requireApiKey } from '../middlewares/middleware.api-key';
 import { declareEnvs } from '../services/service.envs';
 import { apiRouter } from './api';
 
-const { AUTH_KEY } = declareEnvs(['AUTH_KEY']);
+const { AUTH_KEY, HOMEBRIDGE_PORT, HOMEBRIDGE_URL } = declareEnvs([
+  'AUTH_KEY',
+  'HOMEBRIDGE_PORT',
+  'HOMEBRIDGE_URL',
+]);
+
+const _homebridgeUrl = `http://${HOMEBRIDGE_URL}:${HOMEBRIDGE_PORT}`;
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-app.get(
-  '/.well-known/acme-challenge/rhRjhuU-rUN2lcjFk4MihLntcz0lXDrn8RnF5HQ2uAk',
-  (req, res) => {
-    res.send(
-      'rhRjhuU-rUN2lcjFk4MihLntcz0lXDrn8RnF5HQ2uAk.C-Nb31U8v5zWaMCZjWBFyOKbK3ZSYuZuA0tKxpjLCRM'
-    );
-  }
-);
+app.get('/homebridge', (req, res) => {
+  res.redirect(_homebridgeUrl);
+});
 
-app.use(requireApiKey(AUTH_KEY));
+app.use(requireApiKey(AUTH_KEY, ['GET /api/homebridge']));
 
 app.use('/api', apiRouter);
+
+app.use('**', (req, res) => {
+  res.status(404).send('Not Found');
+});
 
 export { app };

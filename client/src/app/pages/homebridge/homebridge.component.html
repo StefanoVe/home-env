@@ -1,13 +1,7 @@
-<ng-container *ngIf="data$ | async as data">
-  <app-generic-popup
-    headerTitle="iframe"
-    decorator="recording"
-    [subtitle]="data.ip"
-  >
-    <iframe
-      [src]="data.url"
-      frameborder="0"
-      class="w-full h-screen overflow-auto"
-    ></iframe>
-  </app-generic-popup>
-</ng-container>
+<app-generic-popup headerTitle="iframe" s decorator="recording">
+  <iframe
+    src="http://localhost:1234/homebridge"
+    frameborder="0"
+    class="w-full h-screen overflow-auto"
+  ></iframe>
+</app-generic-popup>

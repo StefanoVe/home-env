@@ -119,7 +119,7 @@ export class ApiService {
   }
 
   public homebridgeData() {
-    return this.httpClient.get<{ ip: string }>(this._url('homebridge'), {
+    return this.httpClient.get<Document>(this._url('homebridge'), {
       ...this._headers,
     });
   }
