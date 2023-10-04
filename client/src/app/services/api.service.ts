@@ -28,6 +28,7 @@ interface ServerStatus {
   uptime: number;
   version: string;
   ip: string;
+  baseIp: string;
 }
 
 @Injectable({

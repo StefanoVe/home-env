@@ -1,0 +1,12 @@
+<app-generic-popup
+  headerTitle="iframe"
+  [subtitle]="status.baseIp"
+  decorator="recording"
+  *ngIf="status$ | async as status"
+>
+  <iframe
+    [src]="status.baseIp"
+    frameborder="0"
+    class="w-full h-screen overflow-auto"
+  ></iframe>
+</app-generic-popup>

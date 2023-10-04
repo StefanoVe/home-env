@@ -39,6 +39,14 @@ const routes: Routes = [
         (m) => m.HomebridgeComponent
       ),
   },
+  {
+    path: 'router',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/home-router/home-router.component').then(
+        (m) => m.HomeRouterComponent
+      ),
+  },
 ];
 
 @NgModule({

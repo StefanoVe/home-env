@@ -7,7 +7,7 @@
       *ngIf="!loading"
     >
       <div
-        class="poi-terminal px-2 m-0 h-96 overflow-y-scroll hide-scrollbar"
+        class="poi-terminal px-2 m-0 h-96 overflow-y-auto hide-scrollbar"
         #LogsContainer
       >
         <span
@@ -27,7 +27,7 @@
       titleColor="warning"
       *ngIf="!loading"
     >
-      <div class="poi-terminal px-2 m-0 h-96 overflow-scroll">
+      <div class="poi-terminal px-2 m-0 h-96 overflow-y-auto">
         <pre class="leading-6 whitespace-nowrap" *ngFor="let item of env">
           <span class="font-extrabold"> {{item.key}}:</span>
           <span class="opacity-50">{{item.value}}</span>

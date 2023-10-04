@@ -7,14 +7,15 @@ const { MOTD } = declareEnvs(['MOTD']);
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) =>
   res.send({
     success: true,
     motd: MOTD,
     uptime: _uptimeService.get,
     ip: _networkService.fullIp,
+    baseIp: _networkService.baseIp,
     version: currentVersion,
-  });
-});
+  })
+);
 
 export { router as pingRouter };

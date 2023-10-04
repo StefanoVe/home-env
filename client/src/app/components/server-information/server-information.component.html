@@ -9,7 +9,13 @@
   ></app-toast>
 </div>
 
-<ng-container *ngIf="serverStatus$ | async as status">
+<div *ngIf="serverStatus$ | async as status" class="space-y-2 relative">
+  <!-- <div class="relative w-full p-2">
+    <app-toast
+      message="Access feed"
+      subtitle="opens [[ip]] on a new tab"
+    ></app-toast>
+  </div> -->
   <app-generic-popup
     *ngIf="!loading"
     headerTitle="System data"
@@ -40,7 +46,9 @@
         </p>
         <p>
           <span> UPTIME: </span>
-          <span [class.title-warning]="uptime < 3600"> {{ uptimeFormatter(status.uptime) }} </span>
+          <span [class.title-warning]="status.uptime < 3600">
+            {{ uptimeFormatter(status.uptime) }}
+          </span>
         </p>
         <p>
           <span> VERSION:</span>
@@ -49,4 +57,4 @@
       </div>
     </div>
   </app-generic-popup>
-</ng-container>
+</div>
