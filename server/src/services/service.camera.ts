@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { _networkService } from '..';
-import { genericErrorHandler } from './errors';
 import { declareEnvs } from './service.envs';
 
 const { CAMERA_URL, CAMERA_PUBLIC_PORT } = declareEnvs([
@@ -11,7 +10,6 @@ const { CAMERA_URL, CAMERA_PUBLIC_PORT } = declareEnvs([
 export const getCameraFeed = async () => {
   const request = await axios
     .get(CAMERA_URL, { responseType: 'arraybuffer', timeout: 5000 })
-    .catch(genericErrorHandler);
 
   return request.data;
 };
