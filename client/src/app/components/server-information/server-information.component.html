@@ -40,7 +40,7 @@
         </p>
         <p>
           <span> UPTIME: </span>
-          <span> {{ uptimeFormatter(status.uptime) }} </span>
+          <span [class.title-warning]="uptime < 3600"> {{ uptimeFormatter(status.uptime) }} </span>
         </p>
         <p>
           <span> VERSION:</span>

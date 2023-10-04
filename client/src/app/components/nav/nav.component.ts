@@ -41,6 +41,11 @@ export class NavComponent {
       path: '/homebridge',
       disabled: false,
     },
+    {
+      name: "router",
+      path: '/router',
+      disabled: false
+    },
     this._separator,
     {
       name: 'configuration',
@@ -64,7 +69,10 @@ export class NavComponent {
 
   public getNavItems(status: boolean) {
     return this._staticNavItems.map((i) => {
-      if (['/printer', '/debug', '/homebridge'].includes(i.path)) {
+
+        const dynamicRoutes = ['/printer', '/debug', '/homebridge', '/router']
+
+      if (dynamicRoutes.includes(i.path)) {
         return {
           ...i,
           disabled: !status,
