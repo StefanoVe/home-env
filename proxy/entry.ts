@@ -7,6 +7,8 @@ import { postTargetRouter } from './routes/post.target';
 export let instance: ReturnType<typeof main> | null = null;
 export let targetValue: string | null = null;
 
+const bufferToString = (buffer: Buffer) => buffer.toString('utf-8');
+
 export const main = (target: string) => {
   targetValue = target;
 
@@ -28,6 +30,24 @@ export const main = (target: string) => {
     console.log(
       `Proxy is running on port ${Bun.env.PROXY_PORT}, target: ${target}`
     );
+
+    const { stderr, stdout, exitCode } = Bun.spawnSync(
+      `ping -c 1 ${
+        target
+          .replace('http://', '')
+          .replace('https://', '')
+          .replace('www.', '')
+          .split('/')[0]
+          .split(':')[0]
+      }`.split(' ')
+    );
+
+    if (exitCode) {
+      console.log(bufferToString(stdout as unknown as Buffer));
+      console.error(`Failed to ping ${target}`);
+    } else {
+      console.log(`${target} is reachable`);
+    }
   });
 
   instance = _instance;
